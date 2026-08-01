@@ -55,7 +55,7 @@ A second `diagnostics` string output reports which model/device was used and whe
 `SCAIL Auto Prompt Builder V2 (Target + MultiRef JSON)` adds the controls needed for more predictable replacement workflows:
 
 - **Target selection** — describe who/what to replace, for example `main woman`, `woman on the left`, `person #2 in red shirt`, or `foreground dog`.
-- **Multi-reference identity** — optional inputs for `face_reference_image`, `body_reference_image`, `side_reference_image`, and `extra_reference_image` in addition to the primary reference.
+- **Multi-reference identity** — ordered inputs: 1) face close-up, 2) body 3/4 view, 3) body front view, 4) body back view, plus optional extra reference.
 - **Structured task JSON** — the VLM is asked to return explicit fields: `task_mode`, `target_subject`, `reference_identity`, `replace`, `preserve`, `avoid`, `positive_prompt`, `negative_prompt`, and `confidence_notes`.
 - **Positive + negative prompts** — V2 outputs the final positive prompt and a generated negative prompt separately.
 - **Render plan output** — V2 reports input frames, expected output frames, internal 4n+1 frame padding, SCAIL chunk lengths, and a preview/full-render note.
@@ -120,9 +120,10 @@ V2 adds:
 |---|---|---:|---|
 | `task_mode` | COMBO | `character_replacement` | Character, face identity, outfit, or object replacement. Background replacement is intentionally out of scope. |
 | `target_selection` | STRING | `main foreground subject` | Human-readable target selector: `woman on the left`, `person #2`, `main dancer`, etc. |
-| `face_reference_image` | IMAGE | optional | Face close-up / identity reference. |
-| `body_reference_image` | IMAGE | optional | Full-body / silhouette / outfit proportion reference. |
-| `side_reference_image` | IMAGE | optional | Side or 3/4 angle reference. |
+| `face_reference_image` | IMAGE | required | Face close-up / identity reference. |
+| `body_3_4_reference_image` | IMAGE | optional | 3/4 body view: volume, silhouette, side/front mix. |
+| `body_front_reference_image` | IMAGE | optional | Full-body front view: proportions and outfit/front details. |
+| `body_back_reference_image` | IMAGE | optional | Full-body back view: rear silhouette, hair/back/outfit details. |
 | `extra_reference_image` | IMAGE | optional | Any additional identity evidence. |
 
 ## Recommended workflow wiring
@@ -157,7 +158,7 @@ examples/workflows/video_wan21_scail2_character_replacement_16gb_auto_extend_v2_
 examples/workflows/Character Replacement (SCAIL-2 16GB Auto Extend V2 Target MultiRef Preview).json
 ```
 
-The V2 workflow keeps the original working one-button workflow separate and adds target selection, optional face/body/side references, structured JSON preview, generated negative prompt, and preview/full-length planning. It still requires the companion SCAIL Auto Extend node for actual long-video chunking/stitching.
+The V2 workflow keeps the original working one-button workflow separate and adds target selection, ordered identity references (1 face close-up, 2 body 3/4, 3 body front, 4 body back), structured JSON preview, generated negative prompt, and preview/full-length planning. It still requires the companion SCAIL Auto Extend node for actual long-video chunking/stitching.
 
 ## Performance notes
 

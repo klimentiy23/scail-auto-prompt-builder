@@ -1,6 +1,6 @@
 {
   "id": "380fe82d-e003-45ad-82ed-7f6252f0eacb",
-  "revision": 1,
+  "revision": 2,
   "last_node_id": 341,
   "last_link_id": 566,
   "nodes": [
@@ -173,7 +173,7 @@
         }
       },
       "widgets_values": [
-        "Guide: [Subgraph](https://docs.comfy.org/interface/features/subgraph)\n\n[PR#14373](https://github.com/Comfy-Org/ComfyUI/pull/14373)\n## Model Links (for Local Users)\n\n\n**loras**\n\n- [Wan21_I2V_14B_lightx2v_cfg_step_distill_lora_rank64.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/loras/Wan21_I2V_14B_lightx2v_cfg_step_distill_lora_rank64.safetensors)\n- [wan2.1_SCAIL_2_DPO_lora_bf16.safetensors](https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/loras/wan2.1_SCAIL_2_DPO_lora_bf16.safetensors)\n\n**vae**\n\n- [Wan2_1_VAE_bf16.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors)\n\n**text_encoders**\n\n- [umt5_xxl_fp8_e4m3fn_scaled.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors)\n\n**clip_vision**\n\n- [clip_vision_h.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/clip_vision/clip_vision_h.safetensors)\n\n**diffusion_models**\n\n- [wan2.1_14B_SCAIL_2_fp8_scaled.safetensors](https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_fp8_scaled.safetensors)\n\n**checkpoints**\n\n- [sam3.1_multiplex_fp16.safetensors](https://huggingface.co/Comfy-Org/sam3.1/resolve/main/checkpoints/sam3.1_multiplex_fp16.safetensors)\n\n\n## Model Storage Location\n\n```\n📂 ComfyUI/\n├── 📂 models/\n│   ├── 📂 loras/\n│   │   ├── Wan21_I2V_14B_lightx2v_cfg_step_distill_lora_rank64.safetensors\n│   │   └── wan2.1_SCAIL_2_DPO_lora_bf16.safetensors\n│   ├── 📂 vae/\n│   │   └── Wan2_1_VAE_bf16.safetensors\n│   ├── 📂 text_encoders/\n│   │   └── umt5_xxl_fp8_e4m3fn_scaled.safetensors\n│   ├── 📂 clip_vision/\n│   │   └── clip_vision_h.safetensors\n│   ├── 📂 diffusion_models/\n│   │   └── wan2.1_14B_SCAIL_2_fp8_scaled.safetensors\n│   └── 📂 checkpoints/\n│       └── sam3.1_multiplex_fp16.safetensors\n```\n\n## Report Issue\n\nNote: Please update ComfyUI first ([guide](https://docs.comfy.org/installation/update_comfyui)) and prepare required models. Desktop/Cloud updates follow stable releases, so some nightly-supported models may not be available yet.\n\n- Cannot run / runtime errors: [ComfyUI/issues](https://github.com/comfyanonymous/ComfyUI/issues)\n- UI / frontend issues: [ComfyUI_frontend/issues](https://github.com/Comfy-Org/ComfyUI_frontend/issues)\n- Workflow issues: [workflow_templates/issues](https://github.com/Comfy-Org/workflow_templates/issues)\n\n\n## V2 experimental copy\n\nThis V2 copy keeps the old working workflow untouched and adds:\n\n- **Target selection**: describe who to replace in `target_selection`, e.g. `woman on the left`, `main dancer`, `person #2 in red shirt`.\n- **Multi-reference identity**: optional connected inputs for face close-up, full body, and side / 3-4 angle references. Replace their placeholder images with better references when available.\n- **Structured Auto Prompt JSON**: V2 asks the local VLM for target / reference / replace / preserve / avoid / positive / negative fields, previews JSON, and feeds positive + negative prompts into CLIP.\n- **Full-length / preview planner**: report shows input frames, expected output frames, internal SCAIL chunk plan, and rough time estimate. For preview mode, cap the source video loader to 81 frames; full render should use unlimited/0 frame cap.\n\nBackground replacement is intentionally not included in this V2.\n"
+        "Guide: [Subgraph](https://docs.comfy.org/interface/features/subgraph)\n\n[PR#14373](https://github.com/Comfy-Org/ComfyUI/pull/14373)\n## Model Links (for Local Users)\n\n\n**loras**\n\n- [Wan21_I2V_14B_lightx2v_cfg_step_distill_lora_rank64.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/loras/Wan21_I2V_14B_lightx2v_cfg_step_distill_lora_rank64.safetensors)\n- [wan2.1_SCAIL_2_DPO_lora_bf16.safetensors](https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/loras/wan2.1_SCAIL_2_DPO_lora_bf16.safetensors)\n\n**vae**\n\n- [Wan2_1_VAE_bf16.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors)\n\n**text_encoders**\n\n- [umt5_xxl_fp8_e4m3fn_scaled.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors)\n\n**clip_vision**\n\n- [clip_vision_h.safetensors](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/clip_vision/clip_vision_h.safetensors)\n\n**diffusion_models**\n\n- [wan2.1_14B_SCAIL_2_fp8_scaled.safetensors](https://huggingface.co/Comfy-Org/SCAIL-2/resolve/main/diffusion_models/wan2.1_14B_SCAIL_2_fp8_scaled.safetensors)\n\n**checkpoints**\n\n- [sam3.1_multiplex_fp16.safetensors](https://huggingface.co/Comfy-Org/sam3.1/resolve/main/checkpoints/sam3.1_multiplex_fp16.safetensors)\n\n\n## Model Storage Location\n\n```\n📂 ComfyUI/\n├── 📂 models/\n│   ├── 📂 loras/\n│   │   ├── Wan21_I2V_14B_lightx2v_cfg_step_distill_lora_rank64.safetensors\n│   │   └── wan2.1_SCAIL_2_DPO_lora_bf16.safetensors\n│   ├── 📂 vae/\n│   │   └── Wan2_1_VAE_bf16.safetensors\n│   ├── 📂 text_encoders/\n│   │   └── umt5_xxl_fp8_e4m3fn_scaled.safetensors\n│   ├── 📂 clip_vision/\n│   │   └── clip_vision_h.safetensors\n│   ├── 📂 diffusion_models/\n│   │   └── wan2.1_14B_SCAIL_2_fp8_scaled.safetensors\n│   └── 📂 checkpoints/\n│       └── sam3.1_multiplex_fp16.safetensors\n```\n\n## Report Issue\n\nNote: Please update ComfyUI first ([guide](https://docs.comfy.org/installation/update_comfyui)) and prepare required models. Desktop/Cloud updates follow stable releases, so some nightly-supported models may not be available yet.\n\n- Cannot run / runtime errors: [ComfyUI/issues](https://github.com/comfyanonymous/ComfyUI/issues)\n- UI / frontend issues: [ComfyUI_frontend/issues](https://github.com/Comfy-Org/ComfyUI_frontend/issues)\n- Workflow issues: [workflow_templates/issues](https://github.com/Comfy-Org/workflow_templates/issues)\n\n\n## V2 experimental copy\n\nThis V2 copy keeps the old working workflow untouched and adds:\n\n- **Target selection**: describe who to replace in `target_selection`, e.g. `woman on the left`, `main dancer`, `person #2 in red shirt`.\n- **Multi-reference identity**: ordered inputs are 1 face close-up, 2 body 3/4, 3 body front, 4 body back. Replace their placeholder images with better references when available.\n- **Structured Auto Prompt JSON**: V2 asks the local VLM for target / reference / replace / preserve / avoid / positive / negative fields, previews JSON, and feeds positive + negative prompts into CLIP.\n- **Full-length / preview planner**: report shows input frames, expected output frames, internal SCAIL chunk plan, and rough time estimate. For preview mode, cap the source video loader to 81 frames; full render should use unlimited/0 frame cap.\n\nBackground replacement is intentionally not included in this V2.\n"
       ],
       "color": "#222",
       "bgcolor": "#000"
@@ -271,7 +271,8 @@
       "widgets_values": [
         "Photorealistic_portrait_of_a_beautiful_blonde_woman_with_large_original (1).png",
         "image"
-      ]
+      ],
+      "title": "1 Face Reference / лицо крупно"
     },
     {
       "id": 202,
@@ -430,9 +431,9 @@
           "link": 494
         },
         {
-          "label": "reference_image",
+          "label": "1 face reference / лицо",
           "localized_name": "images",
-          "name": "images",
+          "name": "face_reference_image",
           "type": "IMAGE",
           "link": 495
         },
@@ -598,20 +599,20 @@
           "link": null
         },
         {
-          "label": "optional face close-up reference",
-          "name": "face_reference_image",
+          "label": "2 body 3/4 reference / тело 3-4",
+          "name": "body_3_4_reference_image",
           "type": "IMAGE",
           "link": 519
         },
         {
-          "label": "optional full-body reference",
-          "name": "body_reference_image",
+          "label": "3 body front reference / тело спереди",
+          "name": "body_front_reference_image",
           "type": "IMAGE",
           "link": 520
         },
         {
-          "label": "optional side / 3-4 angle reference",
-          "name": "side_reference_image",
+          "label": "4 body back reference / тело сзади",
+          "name": "body_back_reference_image",
           "type": "IMAGE",
           "link": 521
         }
@@ -838,7 +839,7 @@
         "Photorealistic_portrait_of_a_beautiful_blonde_woman_with_large_original (1).png",
         "image"
       ],
-      "title": "Face Reference (optional close-up)"
+      "title": "2 Body Reference 3/4 / тело 3-4"
     },
     {
       "id": 276,
@@ -904,7 +905,7 @@
         "Photorealistic_portrait_of_a_beautiful_blonde_woman_with_large_original (1).png",
         "image"
       ],
-      "title": "Body Reference (optional full body)"
+      "title": "3 Body Reference Front / тело спереди"
     },
     {
       "id": 277,
@@ -970,7 +971,7 @@
         "Photorealistic_portrait_of_a_beautiful_blonde_woman_with_large_original (1).png",
         "image"
       ],
-      "title": "Side / 3-4 Angle Reference (optional)"
+      "title": "4 Body Reference Back / тело сзади"
     }
   ],
   "links": [
@@ -1142,7 +1143,7 @@
           },
           {
             "id": "0badb26e-9abd-4e9c-b221-aab1237b8773",
-            "name": "images",
+            "name": "face_reference_image",
             "type": "IMAGE",
             "linkIds": [
               469,
@@ -1150,7 +1151,7 @@
               473
             ],
             "localized_name": "images",
-            "label": "reference_image",
+            "label": "1 face reference / лицо крупно",
             "pos": [
               -210.37109375,
               4234
@@ -1410,12 +1411,12 @@
           },
           {
             "id": "eb359390-d0df-4503-aed7-8ed4d3416b0d",
-            "name": "face_reference_image",
+            "name": "body_3_4_reference_image",
             "type": "IMAGE",
             "linkIds": [
               567
             ],
-            "label": "optional face close-up reference",
+            "label": "2 body 3/4 reference / тело 3-4",
             "pos": [
               -210.37109375,
               4594
@@ -1423,12 +1424,12 @@
           },
           {
             "id": "5235257a-8f1f-4308-84b2-4992762c21f9",
-            "name": "body_reference_image",
+            "name": "body_front_reference_image",
             "type": "IMAGE",
             "linkIds": [
               568
             ],
-            "label": "optional full-body reference",
+            "label": "3 body front reference / тело спереди",
             "pos": [
               -210.37109375,
               4614
@@ -1436,12 +1437,12 @@
           },
           {
             "id": "12382e6c-dc10-42cc-a959-df3a434a51f8",
-            "name": "side_reference_image",
+            "name": "body_back_reference_image",
             "type": "IMAGE",
             "linkIds": [
               569
             ],
-            "label": "optional side/3-4 angle reference",
+            "label": "4 body back reference / тело сзади",
             "pos": [
               -210.37109375,
               4634
@@ -4162,8 +4163,8 @@
             "mode": 0,
             "inputs": [
               {
-                "localized_name": "reference_image",
-                "name": "reference_image",
+                "localized_name": "face_reference_image",
+                "name": "face_reference_image",
                 "type": "IMAGE",
                 "link": 473
               },
@@ -4264,20 +4265,20 @@
                 "link": null
               },
               {
-                "localized_name": "face_reference_image",
-                "name": "face_reference_image",
+                "localized_name": "body_3_4_reference_image",
+                "name": "body_3_4_reference_image",
                 "type": "IMAGE",
                 "link": 567
               },
               {
-                "localized_name": "body_reference_image",
-                "name": "body_reference_image",
+                "localized_name": "body_front_reference_image",
+                "name": "body_front_reference_image",
                 "type": "IMAGE",
                 "link": 568
               },
               {
-                "localized_name": "side_reference_image",
-                "name": "side_reference_image",
+                "localized_name": "body_back_reference_image",
+                "name": "body_back_reference_image",
                 "type": "IMAGE",
                 "link": 569
               },
@@ -4344,7 +4345,7 @@
                 ]
               }
             ],
-            "title": "SCAIL Auto Prompt Builder V2 (Target + MultiRef JSON)",
+            "title": "SCAIL Auto Prompt Builder V2 (Face + 3/4 + Front + Back)",
             "properties": {
               "aux_id": "klimentiy23/scail-auto-prompt-builder",
               "ver": "d29eca811f9a8e9db5e795379c49832613e5f628",
@@ -4357,7 +4358,7 @@
             },
             "widgets_values": [
               "character_replacement",
-              "main foreground subject (or describe: woman on the left / man in red shirt / person #2)",
+              "main foreground subject (or: woman on the left / man in red shirt / person #2)",
               "",
               "Qwen-VL/Qwen3-VL-2B-Instruct",
               "cuda",
@@ -4597,7 +4598,7 @@
               2410,
               1010
             ],
-            "title": "Structured task JSON V2",
+            "title": "Structured task JSON V2 (Face + 3/4 + Front + Back)",
             "inputs": [
               {
                 "localized_name": "text",

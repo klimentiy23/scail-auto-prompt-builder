@@ -317,7 +317,7 @@ class SCAILAutoPromptBuilderV2(SCAILAutoPromptBuilder):
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "reference_image": ("IMAGE",),
+                "face_reference_image": ("IMAGE",),
                 "video_frames": ("IMAGE",),
                 "task_mode": (["character_replacement", "face_identity_replacement", "outfit_replacement", "object_replacement"], {"default": "character_replacement"}),
                 "target_selection": ("STRING", {"default": "main foreground subject", "multiline": True}),
@@ -331,9 +331,9 @@ class SCAILAutoPromptBuilderV2(SCAILAutoPromptBuilder):
                 "fail_mode": (["fallback_template", "raise_error"], {"default": "fallback_template"}),
             },
             "optional": {
-                "face_reference_image": ("IMAGE",),
-                "body_reference_image": ("IMAGE",),
-                "side_reference_image": ("IMAGE",),
+                "body_3_4_reference_image": ("IMAGE",),
+                "body_front_reference_image": ("IMAGE",),
+                "body_back_reference_image": ("IMAGE",),
                 "extra_reference_image": ("IMAGE",),
             },
         }
@@ -347,7 +347,7 @@ class SCAILAutoPromptBuilderV2(SCAILAutoPromptBuilder):
     def _vlm_structured(self, processor, model, images, task_mode, target_selection, user_hint, max_new_tokens, temperature):
         instruction = f"""
 You are controlling a ComfyUI Wan2.1 SCAIL-2 replacement workflow.
-Images are in this order: primary reference image, optional face/body/side/extra reference images if present, then sampled frames from the source video.
+Images are in this order: face close-up reference, body 3/4 reference, body front reference, body back reference, optional extra reference if present, then sampled frames from the source video.
 
 Return STRICT JSON only. No markdown. No prose outside JSON.
 
@@ -368,7 +368,7 @@ Rules:
 - Target selection from user: {target_selection or 'main foreground subject'}
 - User hint: {user_hint or 'none'}
 - Preserve source video motion timing, pose, camera/framing, background, lighting, shadows, clothing/accessories, interactions, and non-target people/objects unless user explicitly says otherwise.
-- Use reference images only for identity and stable appearance. If several references are present, combine them as face/body/side-view identity evidence.
+- Use reference images only for identity and stable appearance. Combine them by role: face close-up for facial identity, body 3/4 for volume/silhouette, body front for proportions/outfit, and body back for rear silhouette/hair/back details.
 - Do not choose a different person than the target selection.
 - Include continuity and artifact prevention language.
 """.strip()
@@ -388,12 +388,12 @@ Rules:
         text_out = processor.batch_decode(generated, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0].strip()
         return text_out
 
-    def build_prompt_v2(self, reference_image, video_frames, task_mode, target_selection, user_hint, model_folder, device,
+    def build_prompt_v2(self, face_reference_image, video_frames, task_mode, target_selection, user_hint, model_folder, device,
                         max_side, max_new_tokens, temperature, unload_after, fail_mode,
-                        face_reference_image=None, body_reference_image=None, side_reference_image=None, extra_reference_image=None):
+                        body_3_4_reference_image=None, body_front_reference_image=None, body_back_reference_image=None, extra_reference_image=None):
         diagnostics = []
-        ref_imgs = _sample_images(reference_image, 1, max_side)
-        for optional in [face_reference_image, body_reference_image, side_reference_image, extra_reference_image]:
+        ref_imgs = _sample_images(face_reference_image, 1, max_side)
+        for optional in [body_3_4_reference_image, body_front_reference_image, body_back_reference_image, extra_reference_image]:
             ref_imgs.extend(_sample_images(optional, 1, max_side))
         vid_imgs = _sample_images(video_frames, 3, max_side)
         images = ref_imgs + vid_imgs

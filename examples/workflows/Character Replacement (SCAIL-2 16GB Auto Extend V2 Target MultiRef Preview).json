@@ -23,9 +23,9 @@
           "link": null
         },
         {
-          "label": "reference_image",
+          "label": "1 face reference / лицо",
           "localized_name": "images",
-          "name": "images",
+          "name": "face_reference_image",
           "type": "IMAGE",
           "link": null
         },
@@ -191,20 +191,20 @@
           "link": null
         },
         {
-          "label": "optional face close-up reference",
+          "label": "1 face reference / лицо",
           "name": "face_reference_image",
           "type": "IMAGE",
           "link": null
         },
         {
-          "label": "optional full-body reference",
-          "name": "body_reference_image",
+          "label": "2 body 3/4 reference / тело 3-4",
+          "name": "body_3_4_reference_image",
           "type": "IMAGE",
           "link": null
         },
         {
-          "label": "optional side / 3-4 angle reference",
-          "name": "side_reference_image",
+          "label": "4 body back reference / тело сзади",
+          "name": "body_back_reference_image",
           "type": "IMAGE",
           "link": null
         }
@@ -416,7 +416,7 @@
           },
           {
             "id": "0badb26e-9abd-4e9c-b221-aab1237b8773",
-            "name": "images",
+            "name": "face_reference_image",
             "type": "IMAGE",
             "linkIds": [
               469,
@@ -424,7 +424,7 @@
               473
             ],
             "localized_name": "images",
-            "label": "reference_image",
+            "label": "1 face reference / лицо крупно",
             "pos": [
               -210.37109375,
               4234
@@ -684,12 +684,12 @@
           },
           {
             "id": "eb359390-d0df-4503-aed7-8ed4d3416b0d",
-            "name": "face_reference_image",
+            "name": "body_3_4_reference_image",
             "type": "IMAGE",
             "linkIds": [
               567
             ],
-            "label": "optional face close-up reference",
+            "label": "2 body 3/4 reference / тело 3-4",
             "pos": [
               -210.37109375,
               4594
@@ -697,12 +697,12 @@
           },
           {
             "id": "5235257a-8f1f-4308-84b2-4992762c21f9",
-            "name": "body_reference_image",
+            "name": "body_front_reference_image",
             "type": "IMAGE",
             "linkIds": [
               568
             ],
-            "label": "optional full-body reference",
+            "label": "3 body front reference / тело спереди",
             "pos": [
               -210.37109375,
               4614
@@ -710,12 +710,12 @@
           },
           {
             "id": "12382e6c-dc10-42cc-a959-df3a434a51f8",
-            "name": "side_reference_image",
+            "name": "body_back_reference_image",
             "type": "IMAGE",
             "linkIds": [
               569
             ],
-            "label": "optional side/3-4 angle reference",
+            "label": "4 body back reference / тело сзади",
             "pos": [
               -210.37109375,
               4634
@@ -3436,8 +3436,8 @@
             "mode": 0,
             "inputs": [
               {
-                "localized_name": "reference_image",
-                "name": "reference_image",
+                "localized_name": "face_reference_image",
+                "name": "face_reference_image",
                 "type": "IMAGE",
                 "link": 473
               },
@@ -3538,20 +3538,20 @@
                 "link": null
               },
               {
-                "localized_name": "face_reference_image",
-                "name": "face_reference_image",
+                "localized_name": "body_3_4_reference_image",
+                "name": "body_3_4_reference_image",
                 "type": "IMAGE",
                 "link": 567
               },
               {
-                "localized_name": "body_reference_image",
-                "name": "body_reference_image",
+                "localized_name": "body_front_reference_image",
+                "name": "body_front_reference_image",
                 "type": "IMAGE",
                 "link": 568
               },
               {
-                "localized_name": "side_reference_image",
-                "name": "side_reference_image",
+                "localized_name": "body_back_reference_image",
+                "name": "body_back_reference_image",
                 "type": "IMAGE",
                 "link": 569
               },
@@ -3618,7 +3618,7 @@
                 ]
               }
             ],
-            "title": "SCAIL Auto Prompt Builder V2 (Target + MultiRef JSON)",
+            "title": "SCAIL Auto Prompt Builder V2 (Face + 3/4 + Front + Back)",
             "properties": {
               "aux_id": "klimentiy23/scail-auto-prompt-builder",
               "ver": "d29eca811f9a8e9db5e795379c49832613e5f628",
@@ -3631,7 +3631,7 @@
             },
             "widgets_values": [
               "character_replacement",
-              "main foreground subject (or describe: woman on the left / man in red shirt / person #2)",
+              "main foreground subject (or: woman on the left / man in red shirt / person #2)",
               "",
               "Qwen-VL/Qwen3-VL-2B-Instruct",
               "cuda",
@@ -3871,7 +3871,7 @@
               2410,
               1010
             ],
-            "title": "Structured task JSON V2",
+            "title": "Structured task JSON V2 (Face + 3/4 + Front + Back)",
             "inputs": [
               {
                 "localized_name": "text",
@@ -4937,5 +4937,6 @@
   },
   "groups": [],
   "config": {},
-  "extra": {}
+  "extra": {},
+  "revision": 1
 }
