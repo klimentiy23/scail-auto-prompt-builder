@@ -9,22 +9,27 @@ It is designed for workflows where the user wants to drop in a reference photo a
 
 ## Node
 
-Display name:
+Display names:
 
 ```text
 SCAIL Auto Prompt Builder
+SCAIL Auto Prompt Builder V2 (Target + MultiRef JSON)
+SCAIL Full-Length / Preview Planner
 ```
 
-Class name:
+Class names:
 
 ```text
 SCAILAutoPromptBuilder
+SCAILAutoPromptBuilderV2
+SCAILFullLengthPlanner
 ```
 
-Category:
+Categories:
 
 ```text
 SCAIL/Prompt
+SCAIL/Utilities
 ```
 
 ## What it does
@@ -44,6 +49,33 @@ then asks a local vision-language model to write a SCAIL-friendly positive promp
 The output is a plain `STRING`, intended to feed directly into `CLIPTextEncode` / positive prompt conditioning.
 
 A second `diagnostics` string output reports which model/device was used and whether VLM generation succeeded.
+
+## V2: target selection, multi-reference identity, structured JSON
+
+`SCAIL Auto Prompt Builder V2 (Target + MultiRef JSON)` adds the controls needed for more predictable replacement workflows:
+
+- **Target selection** — describe who/what to replace, for example `main woman`, `woman on the left`, `person #2 in red shirt`, or `foreground dog`.
+- **Multi-reference identity** — optional inputs for `face_reference_image`, `body_reference_image`, `side_reference_image`, and `extra_reference_image` in addition to the primary reference.
+- **Structured task JSON** — the VLM is asked to return explicit fields: `task_mode`, `target_subject`, `reference_identity`, `replace`, `preserve`, `avoid`, `positive_prompt`, `negative_prompt`, and `confidence_notes`.
+- **Positive + negative prompts** — V2 outputs the final positive prompt and a generated negative prompt separately.
+- **Render plan output** — V2 reports input frames, expected output frames, internal 4n+1 frame padding, SCAIL chunk lengths, and a preview/full-render note.
+
+The V2 node still uses local models only and keeps `unload_after=True` by default so VRAM is released before Wan/SCAIL video generation.
+
+## Full-length / preview planner
+
+`SCAIL Full-Length / Preview Planner` is a lightweight utility node for long videos. It accepts the video frame batch and reports:
+
+```text
+input: 272 frames
+output expected: 272 frames
+internal planned frames: 273
+chunks: 4 [81, 81, 81, 45]
+frame_load_cap to use: 0 (0/unlimited full render)
+rough estimate: ~98.0 minutes
+```
+
+Use `mode=preview_81` to plan a first 81-frame test, then switch to full length by setting the video loader frame cap to `0` / unlimited for the final render.
 
 ## Local model layout
 
@@ -82,6 +114,17 @@ COMFYUI_MODELS_DIR=D:/comfyui/models
 | `fail_mode` | COMBO | `fallback_template` | On VLM failure, either emit a generic safe SCAIL prompt or raise. |
 | `user_hint` | STRING | empty | Optional target instruction, e.g. `replace only the woman in black cowboy outfit`. |
 
+V2 adds:
+
+| Input | Type | Default | Notes |
+|---|---|---:|---|
+| `task_mode` | COMBO | `character_replacement` | Character, face identity, outfit, or object replacement. Background replacement is intentionally out of scope. |
+| `target_selection` | STRING | `main foreground subject` | Human-readable target selector: `woman on the left`, `person #2`, `main dancer`, etc. |
+| `face_reference_image` | IMAGE | optional | Face close-up / identity reference. |
+| `body_reference_image` | IMAGE | optional | Full-body / silhouette / outfit proportion reference. |
+| `side_reference_image` | IMAGE | optional | Side or 3/4 angle reference. |
+| `extra_reference_image` | IMAGE | optional | Any additional identity evidence. |
+
 ## Recommended workflow wiring
 
 ```text
@@ -104,6 +147,17 @@ For one-button use, leave `user_hint` empty. If needed, type a short instruction
 ```text
 replace the main woman only, keep the hat and handbag from the video
 ```
+
+## Example workflow / blueprint
+
+This repository includes an experimental V2 example workflow and blueprint under:
+
+```text
+examples/workflows/video_wan21_scail2_character_replacement_16gb_auto_extend_v2_target_multiref_preview.json
+examples/workflows/Character Replacement (SCAIL-2 16GB Auto Extend V2 Target MultiRef Preview).json
+```
+
+The V2 workflow keeps the original working one-button workflow separate and adds target selection, optional face/body/side references, structured JSON preview, generated negative prompt, and preview/full-length planning. It still requires the companion SCAIL Auto Extend node for actual long-video chunking/stitching.
 
 ## Performance notes
 
