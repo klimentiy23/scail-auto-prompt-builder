@@ -158,6 +158,21 @@ examples/workflows/video_wan21_scail2_character_replacement_16gb_auto_extend_v2_
 examples/workflows/Character Replacement (SCAIL-2 16GB Auto Extend V2 Target MultiRef Preview).json
 ```
 
+A separate SageAttention/Triton-annotated example is also included:
+
+```text
+examples/workflows/video_wan21_scail2_character_replacement_16gb_auto_extend_v2_sage_triton_optimized.json
+examples/workflows/Character Replacement (SCAIL-2 16GB Auto Extend V2 Sage Triton Optimized).json
+```
+
+Attention backends are ComfyUI startup options, not per-node workflow widgets. Use the Sage/Triton workflow together with a ComfyUI launch such as:
+
+```bash
+python_embeded/python.exe -s ComfyUI/main.py --windows-standalone-build --use-sage-attention --enable-triton-backend
+```
+
+Verify startup logs contain both `Using sage attention` and `Found triton ... Enabling comfy-kitchen triton backend`.
+
 The V2 workflow keeps the original working one-button workflow separate and adds target selection, ordered identity references (1 face close-up for VLM identity, 2 body 3/4, 3 body front as the SCAIL main reference/mask, 4 body back), structured JSON preview, generated negative prompt, and preview/full-length planning. It still requires the companion SCAIL Auto Extend node for actual long-video chunking/stitching.
 
 ## Performance notes
