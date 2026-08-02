@@ -71,7 +71,7 @@ input: 272 frames
 output expected: 272 frames
 internal planned frames: 273
 chunks: 4 [81, 81, 81, 45]
-frame_load_cap to use: 0 (0/unlimited full render)
+preview control: core LoadVideo has no frame_load_cap; use a pre-trimmed clip, or VHS_LoadVideo with frame_load_cap=0 (0/unlimited full render)
 rough estimate: ~98.0 minutes
 ```
 
@@ -153,18 +153,33 @@ replace the main woman only, keep the hat and handbag from the video
 
 ### Recommended simple workflow
 
-Use this first:
+Use this first for a baseline:
 
 ```text
 examples/workflows/video_wan21_scail2_character_replacement_v31_simple_autoprompt_autoextend.json
 ```
 
-It keeps the graph simple:
+If raw SCAIL changes the room/background, use the background-preserving fallback:
+
+```text
+examples/workflows/video_wan21_scail2_character_replacement_v32_background_preserve_autoprompt_autoextend.json
+```
+
+If the replaced subject's skin/clothing color jumps between frames, use the color-stable fallback:
+
+```text
+examples/workflows/video_wan21_scail2_character_replacement_v33_background_preserve_colorstable_autoprompt_autoextend.json
+```
+
+V3.3 enables source-background compositing plus temporal color smoothing inside the target mask (`alpha=0.85`, `strength=0.65`).
+
+The simple family keeps the graph focused:
 
 ```text
 source video + one full-body/front reference
 → SCAIL Auto Prompt Builder V2
-→ SCAIL Auto Extend V3 full-length render
+→ SCAIL Auto Extend full-length render
+→ optional source-background/subject-color stabilization
 → SaveVideo
 ```
 
