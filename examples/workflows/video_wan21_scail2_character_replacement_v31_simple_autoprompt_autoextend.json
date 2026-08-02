@@ -761,7 +761,7 @@
         }
       },
       "widgets_values": [
-        "# V3.1 Simple — recommended workflow\n\nThis is the simplified workflow to use first.\n\n## What changed vs the cluttered GAP hybrid\n- Uses **our SCAIL Auto Prompt Builder V2** again.\n- Uses **our SCAIL Auto Extend V3** for full-length video, chunking, overlap, stitching and LAB color transfer.\n- Uses **one required reference photo** only: full body/front/person.\n- No manual `base_prompt`, `character_prompts`, or `prompt_schedule` fields.\n- No GAP generator/orchestrator in the main path.\n\n## Why one reference by default?\nSCAIL technically supports multiple reference images, but extra views are conditional. The safest baseline is one clean full-body/front reference. Use the heavier multi-reference V2 only if identity drifts on turns/back view.\n\n## How to use\n1. Load the source video.\n2. Load one good full-body/front reference photo.\n3. Optional: write a short target hint in the subgraph field, e.g. `main foreground subject` or `woman sitting on the floor`.\n4. First test with 81-frame preview if needed.\n5. Full render: source video frame cap 0/unlimited.\n\nKeep `wan2.1_14B_SCAIL_2_fp8_scaled.safetensors`, `chunk_length=81`, `overlap=5`, `color_transfer=True` on 16GB VRAM.\n"
+        "# V3.1 Simple — recommended workflow\n\nThis is the simplified workflow to use first.\n\n## What changed vs the cluttered GAP hybrid\n- Uses **our SCAIL Auto Prompt Builder V2** again.\n- Uses **our SCAIL Auto Extend V3** for full-length video, chunking, overlap, stitching and LAB color transfer.\n- Uses **one required reference photo** only: full body/front/person.\n- No manual `base_prompt`, `character_prompts`, or `prompt_schedule` fields.\n- No GAP generator/orchestrator in the main path.\n\n## Why one reference by default?\nSCAIL technically supports multiple reference images, but extra views are conditional. The safest baseline is one clean full-body/front reference. Use the heavier multi-reference V2 only if identity drifts on turns/back view.\n\n## How to use\n1. Load the source video.\n2. Load one good full-body/front reference photo.\n3. Optional: write a short target hint in the subgraph field, e.g. `main foreground subject` or `woman sitting on the floor`.\n4. For a first 81-frame preview, use a pre-trimmed preview clip. This workflow uses core LoadVideo, which has no frame_load_cap.\n5. Full render: load the full source video normally.\n\nKeep `wan2.1_14B_SCAIL_2_fp8_scaled.safetensors`, `chunk_length=81`, `overlap=5`, `color_transfer=True` on 16GB VRAM.\n"
       ],
       "color": "#222",
       "bgcolor": "#000"
@@ -4533,7 +4533,7 @@
               }
             },
             "widgets_values": [
-              "input: 115 frames\noutput expected: 115 frames\ninternal planned frames: 117\nchunks: 2 [81, 41]\npreview mode: set video loader frame cap to 81 for a first-chunk preview; full render uses frame cap 0/unlimited."
+              "input: 115 frames\noutput expected: 115 frames\ninternal planned frames: 117\nchunks: 2 [81, 41]\npreview note: this workflow uses core LoadVideo, which has no frame_load_cap. For an 81-frame preview, use a pre-trimmed preview clip or switch the loader to VHS_LoadVideo."
             ]
           },
           {
@@ -4700,7 +4700,7 @@
               }
             },
             "widgets_values": [
-              "mode: preview_81\ninput: 115 frames (3.83s at 30.00 fps)\nrender input: 81 frames (2.70s)\noutput expected: 81 frames\ninternal planned frames: 81\nchunks: 1 [81]\nframe_load_cap to use: 81 (81-frame preview)\nrough estimate: ~24.5 minutes"
+              "mode: preview_81\ninput: 115 frames (3.83s at 30.00 fps)\nrender input: 81 frames (2.70s)\noutput expected: 81 frames\ninternal planned frames: 81\nchunks: 1 [81]\npreview control: core LoadVideo has no frame_load_cap; use a pre-trimmed clip, or VHS_LoadVideo with frame_load_cap=81 (81-frame preview)\nrough estimate: ~24.5 minutes"
             ]
           }
         ],

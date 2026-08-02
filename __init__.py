@@ -406,7 +406,8 @@ Rules:
                        f"output expected: {input_frames} frames\n"
                        f"internal planned frames: {planned_frames}\n"
                        f"chunks: {len(chunks)} {chunks}\n"
-                       f"preview mode: set video loader frame cap to 81 for a first-chunk preview; full render uses frame cap 0/unlimited.")
+                       f"preview note: this workflow uses core LoadVideo, which has no frame_load_cap. "
+                       f"For an 81-frame preview, use a pre-trimmed preview clip or switch the loader to VHS_LoadVideo.")
         diagnostics.append(
             f"v2 images_used={len(images)} references={len(ref_imgs)} video_samples={len(vid_imgs)} "
             f"target={target_selection!r} task={task_mode} model={model_folder} device={device}"
@@ -476,7 +477,7 @@ class SCAILFullLengthPlanner:
                   f"output expected: {render_input} frames\n"
                   f"internal planned frames: {planned_frames}\n"
                   f"chunks: {len(chunks)} {chunks}\n"
-                  f"frame_load_cap to use: {frame_load_cap} ({'81-frame preview' if frame_load_cap else '0/unlimited full render'})\n"
+                  f"preview control: core LoadVideo has no frame_load_cap; use a pre-trimmed clip, or VHS_LoadVideo with frame_load_cap={frame_load_cap} ({'81-frame preview' if frame_load_cap else '0/unlimited full render'})\n"
                   f"rough estimate: ~{estimated:.1f} minutes")
         return (report, frame_load_cap, input_frames, render_input, float(estimated))
 

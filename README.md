@@ -75,7 +75,7 @@ frame_load_cap to use: 0 (0/unlimited full render)
 rough estimate: ~98.0 minutes
 ```
 
-Use `mode=preview_81` to plan a first 81-frame test, then switch to full length by setting the video loader frame cap to `0` / unlimited for the final render.
+Use `mode=preview_81` to estimate a first 81-frame test. The current simple workflow uses ComfyUI core `LoadVideo`, which does **not** expose `frame_load_cap`; for a true 81-frame preview, use a pre-trimmed preview clip or switch the loader to Video Helper Suite `VHS_LoadVideo` / `VHS_LoadVideoPath`, where `frame_load_cap=81` and `frame_load_cap=0` means unlimited.
 
 ## Local model layout
 
