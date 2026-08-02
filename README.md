@@ -149,23 +149,46 @@ For one-button use, leave `user_hint` empty. If needed, type a short instruction
 replace the main woman only, keep the hat and handbag from the video
 ```
 
-## Example workflow / blueprint
+## Example workflows / blueprints
 
-This repository includes an experimental V2 example workflow and blueprint under:
+### Recommended simple workflow
+
+Use this first:
+
+```text
+examples/workflows/video_wan21_scail2_character_replacement_v31_simple_autoprompt_autoextend.json
+```
+
+It keeps the graph simple:
+
+```text
+source video + one full-body/front reference
+→ SCAIL Auto Prompt Builder V2
+→ SCAIL Auto Extend V3 full-length render
+→ SaveVideo
+```
+
+The same full-body/front reference is routed to both AutoPrompt identity context and the main SCAIL reference/mask/CLIPVision path. This is the safest default for a user-facing workflow.
+
+### Advanced multi-reference workflow
+
+Use only if the simple workflow has identity drift, especially on turns/back view:
 
 ```text
 examples/workflows/video_wan21_scail2_character_replacement_16gb_auto_extend_v2_target_multiref_preview.json
 examples/workflows/Character Replacement (SCAIL-2 16GB Auto Extend V2 Target MultiRef Preview).json
 ```
 
-A separate SageAttention/Triton-annotated example is also included:
+Multiple reference images are useful as extra identity evidence, but they are not a guaranteed improvement. SCAIL can accept a batch of reference images, yet large/unclear stacks can hurt placement/quality. Keep one clean body/front reference as default; add face/3-4/back views only when the clip needs them.
+
+A separate SageAttention/Triton-annotated V2 example is also included:
 
 ```text
 examples/workflows/video_wan21_scail2_character_replacement_16gb_auto_extend_v2_sage_triton_optimized.json
 examples/workflows/Character Replacement (SCAIL-2 16GB Auto Extend V2 Sage Triton Optimized).json
 ```
 
-Attention backends are ComfyUI startup options, not per-node workflow widgets. Use the Sage/Triton workflow together with a ComfyUI launch such as:
+Attention backends are ComfyUI startup options, not per-node workflow widgets. Use the Sage/Triton workflows together with a ComfyUI launch such as:
 
 ```bash
 python_embeded/python.exe -s ComfyUI/main.py --windows-standalone-build --use-sage-attention --enable-triton-backend
