@@ -1,8 +1,8 @@
 {
   "id": "380fe82d-e003-45ad-82ed-7f6252f0eacb",
-  "revision": 2,
+  "revision": 3,
   "last_node_id": 341,
-  "last_link_id": 566,
+  "last_link_id": 579,
   "nodes": [
     {
       "id": 201,
@@ -431,7 +431,7 @@
           "link": 494
         },
         {
-          "label": "1 face reference / лицо",
+          "label": "1 Face Reference / prompt identity only",
           "localized_name": "images",
           "name": "face_reference_image",
           "type": "IMAGE",
@@ -605,7 +605,7 @@
           "link": 519
         },
         {
-          "label": "3 body front reference / тело спереди",
+          "label": "3 Body Reference Front / SCAIL main reference",
           "name": "body_front_reference_image",
           "type": "IMAGE",
           "link": 520
@@ -1146,12 +1146,10 @@
             "name": "face_reference_image",
             "type": "IMAGE",
             "linkIds": [
-              469,
-              408,
-              473
+              576
             ],
             "localized_name": "images",
-            "label": "1 face reference / лицо крупно",
+            "label": "1 Face Reference / prompt identity only",
             "pos": [
               -210.37109375,
               4234
@@ -1427,9 +1425,12 @@
             "name": "body_front_reference_image",
             "type": "IMAGE",
             "linkIds": [
-              568
+              568,
+              577,
+              578,
+              579
             ],
-            "label": "3 body front reference / тело спереди",
+            "label": "3 Body Reference Front / SCAIL main reference",
             "pos": [
               -210.37109375,
               4614
@@ -3273,7 +3274,7 @@
                 "localized_name": "изображения",
                 "name": "images",
                 "type": "IMAGE",
-                "link": 469
+                "link": 578
               },
               {
                 "label": "model",
@@ -3481,7 +3482,7 @@
                 "localized_name": "изображение",
                 "name": "image",
                 "type": "IMAGE",
-                "link": 408
+                "link": 577
               },
               {
                 "localized_name": "обрезка",
@@ -3700,7 +3701,7 @@
                 "name": "reference_image",
                 "shape": 7,
                 "type": "IMAGE",
-                "link": 473
+                "link": 579
               },
               {
                 "localized_name": "reference_image_mask",
@@ -4166,7 +4167,7 @@
                 "localized_name": "face_reference_image",
                 "name": "face_reference_image",
                 "type": "IMAGE",
-                "link": 473
+                "link": 576
               },
               {
                 "localized_name": "video_frames",
@@ -4358,7 +4359,7 @@
             },
             "widgets_values": [
               "character_replacement",
-              "main foreground subject (or: woman on the left / man in red shirt / person #2)",
+              "main foreground subject",
               "",
               "Qwen-VL/Qwen3-VL-2B-Instruct",
               "cuda",
@@ -5271,22 +5272,6 @@
             "type": "VIDEO"
           },
           {
-            "id": 469,
-            "origin_id": -10,
-            "origin_slot": 1,
-            "target_id": 198,
-            "target_slot": 0,
-            "type": "IMAGE"
-          },
-          {
-            "id": 408,
-            "origin_id": -10,
-            "origin_slot": 1,
-            "target_id": 76,
-            "target_slot": 1,
-            "type": "IMAGE"
-          },
-          {
             "id": 504,
             "origin_id": -10,
             "origin_slot": 4,
@@ -5511,14 +5496,6 @@
             "type": "IMAGE"
           },
           {
-            "id": 473,
-            "origin_id": -10,
-            "origin_slot": 1,
-            "target_id": 114,
-            "target_slot": 8,
-            "type": "IMAGE"
-          },
-          {
             "id": 472,
             "origin_id": 197,
             "origin_slot": 1,
@@ -5653,12 +5630,45 @@
             "target_id": 346,
             "target_slot": 0,
             "type": "STRING"
+          },
+          {
+            "id": 576,
+            "origin_id": -10,
+            "origin_slot": 1,
+            "target_id": 330,
+            "target_slot": 0,
+            "type": "IMAGE"
+          },
+          {
+            "id": 577,
+            "origin_id": -10,
+            "origin_slot": 24,
+            "target_id": 76,
+            "target_slot": 1,
+            "type": "IMAGE"
+          },
+          {
+            "id": 578,
+            "origin_id": -10,
+            "origin_slot": 24,
+            "target_id": 198,
+            "target_slot": 0,
+            "type": "IMAGE"
+          },
+          {
+            "id": 579,
+            "origin_id": -10,
+            "origin_slot": 24,
+            "target_id": 114,
+            "target_slot": 8,
+            "type": "IMAGE"
           }
         ],
         "extra": {
           "ue_links": [],
           "links_added_by_ue": []
-        }
+        },
+        "last_link_id": 579
       }
     ]
   },
